@@ -10,11 +10,11 @@ This project provides the code developed for the study in [Rajendran S et al. Si
 
 ## **shinyApp Data**
 
-[shinyApp](https://weillcornellmed.shinyapps.io/3_samples_ShinyCell)
+[Click here to load shinyApp](https://weillcornellmed.shinyapps.io/3_samples_ShinyCell)
 
 ![](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/Figures/UMAP.jpg)
 
-[shinyApp source codes and data for above ](https://www.dropbox.com/sh/s7ewv1s5clmpjua/AAALKvlMATgbxhcrlDEhqiqqa)
+[shinyApp source codes and data](https://www.dropbox.com/sh/s7ewv1s5clmpjua/AAALKvlMATgbxhcrlDEhqiqqa)
 
 ## **Reproduce results**
 
