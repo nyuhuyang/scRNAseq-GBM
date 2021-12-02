@@ -13,7 +13,6 @@ This project provides the code developed for the study in [Rajendran S et al. Si
 [shinyApp](https://weillcornellmed.shinyapps.io/3_samples_ShinyCell)
 
 ![](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/Figures/UMAP.jpg)
-![](https://github.com/nyuhuyang/scRNAseq-MouseSkinEpithelia/blob/master/Figs/F1B_dotplot.jpeg)
 
 [shinyApp source codes and data for above ](https://www.dropbox.com/sh/s7ewv1s5clmpjua/AAALKvlMATgbxhcrlDEhqiqqa)
 
