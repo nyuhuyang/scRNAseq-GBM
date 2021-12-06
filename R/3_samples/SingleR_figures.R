@@ -16,7 +16,7 @@ if(!dir.exists(path)) dir.create(path, recursive = T)
 ##############################
 # create singleR data frame
 ###############################
-object = readRDS("data/all.samples.integrated.updated.singleR.2.rds")
+object = readRDS("data/GBM_3_20210822.rds")
 pred = readRDS(file = "output/GBM_PBMC_20210907_singleR_pred.rds")
 
 singlerDF = data.frame("label.fine" = pred$pruned.labels,

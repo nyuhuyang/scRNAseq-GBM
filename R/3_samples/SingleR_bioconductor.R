@@ -9,7 +9,7 @@ source("https://raw.githubusercontent.com/nyuhuyang/SeuratExtra/master/R/Seurat4
 source("https://raw.githubusercontent.com/nyuhuyang/SeuratExtra/master/R/SingleR_functions.R")
 
 # ====== load single cell =============
-object <- readRDS("data/all.samples.integrated.updated.singleR.2.rds")
+object <- readRDS("data/GBM_3_20210822.rds")
 
 sce <- SingleCellExperiment(list(logcounts=object[["RNA"]]@data),
                                 colData=DataFrame(object@meta.data))
