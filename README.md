@@ -31,7 +31,7 @@ Read 10X matrix and perform quality control.
 [2 Seurat_setup](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/Seurat_setup.R)
 Interagted dataset using harmony and prepare UMAP and tSNE plot.
 
-#### **3-4. Identify cell by SingleR and prepare figures**
+#### **3~4. Identify cell by SingleR and prepare figures**
 [3 SingleR_bioconductor.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_bioconductor.R)
 [4 SingleR_figures.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_figures.R)
 
