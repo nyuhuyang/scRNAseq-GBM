@@ -33,6 +33,7 @@ Interagted dataset using harmony and prepare UMAP and tSNE plot.
 
 #### **3~4. Identify cell by SingleR and prepare figures**
 [3 SingleR_bioconductor.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_bioconductor.R) \newline
+
 [4 SingleR_figures.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_figures.R)
 
 This script uses Blueprint and Encode Data to to identify cell types automatically
