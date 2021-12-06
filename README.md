@@ -24,12 +24,20 @@ account for about two-thirds of all glioma diagnoses in adolescents and young ad
 
 ## **Reproduce results**
 
-#### **1. Data preprocess**
-[1 setup.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/setup.R)
+#### **1~2. Data preprocess**
+[1 QC.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/QC.R)
+Read 10X matrix and perform quality control.
 
-#### **2-3. Identify cell by SingleR and prepare figures**
-[2 SingleR_bioconductor.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_bioconductor.R)
-[3 SingleR_figures.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_figures.R)
+[2 Seurat_setup](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/Seurat_setup.R)
+Interagted dataset using harmony and prepare UMAP and tSNE plot.
+
+#### **3-4. Identify cell by SingleR and prepare figures**
+[3 SingleR_bioconductor.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_bioconductor.R)
+[4 SingleR_figures.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/SingleR_figures.R)
 
 This script uses Blueprint and Encode Data to to identify cell types automatically
 
+#### **5. Prepare figures**
+[5 MT_Analysis.R]https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/MT_Analysis.R
+
+We use this script to prepare part of figures. We use above shinyApp to prepare other figures like volcano plots.
