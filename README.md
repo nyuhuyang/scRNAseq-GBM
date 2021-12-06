@@ -38,6 +38,6 @@ Interagted dataset using harmony and prepare UMAP and tSNE plot.
 This script uses Blueprint and Encode Data to to identify cell types automatically
 
 #### **5. Prepare figures**
-[5 MT_Analysis.R]https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/MT_Analysis.R
+[5 MT_Analysis.R](https://github.com/nyuhuyang/scRNAseq-GBM/blob/main/R/3_samples/MT_Analysis.R)
 
 We use this script to prepare part of figures. We use above shinyApp to prepare other figures like volcano plots.
