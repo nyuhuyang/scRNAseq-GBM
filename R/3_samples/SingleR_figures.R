@@ -1,8 +1,7 @@
-# conda activate r4.0.3
+# conda activate r4.1.1
 library(Seurat)
 library(magrittr)
 library(pheatmap)
-library(kableExtra)
 library(dplyr)
 library(tidyr)
 library(ggpubr)
@@ -16,9 +15,11 @@ if(!dir.exists(path)) dir.create(path, recursive = T)
 ##############################
 # create singleR data frame
 ###############################
-object = readRDS("data/GBM_3_20210822.rds")
+object = readRDS("data/GBM_PBMC_3_20210908.rds")
 pred = readRDS(file = "output/GBM_PBMC_20210907_singleR_pred.rds")
-
+pred = readRDS(file = "output/GBM_PBMC_20220329_VHove2019_singleR_pred.rds")
+pred = readRDS(file = "output/GBM_PBMC_20220401_PAntunes2021_singleR_pred.rds")
+pred = readRDS(file = "output/GBM_PBMC_20220404_VHove2019_v2_singleR_pred.rds")
 singlerDF = data.frame("label.fine" = pred$pruned.labels,
                        row.names = rownames(pred))
 table(rownames(pred) == rownames(object@meta.data))
@@ -26,7 +27,7 @@ table(is.na(singlerDF$label.fine))
 singlerDF$label.fine[is.na(singlerDF$label.fine)]= "unknown"
 
 ##############################
-# adjust cell label
+# adjust final_celltype cell label
 ##############################
 # combine cell types
 singlerDF$final_celltype = object$final_celltype
@@ -46,6 +47,22 @@ singlerDF$cell.label %<>% gsub("Mesangial cells|Neurons|Skeletal muscle","Nonhem
 singlerDF %<>% cbind(object[["umap"]]@cell.embeddings)
 singlerDF[singlerDF$label.fine %in% "Macrophages" & singlerDF$UMAP_1 < -6,"cell.label"] ="Macrophages cluster 1"
 
+
+##############################
+# adjust VHove2019 cell label
+##############################
+object$VHove2019_label = singlerDF$label.fine
+UMAPPlot.1(object, group.by = "VHove2019_label",label = T, label.repel = T,do.print = T)
+
+object$VHove2019_v2 = singlerDF$label.fine
+
+##############################
+# adjust PAntunes2021 cell label
+##############################
+object$PAntunes2021 = singlerDF$label.fine
+UMAPPlot.1(object, group.by = "PAntunes2021",label = T, label.repel = T,do.print = T)
+
+
 ##############################
 # process color scheme
 ##############################
@@ -58,7 +75,7 @@ UMAPPlot.1(object = object, label = T, label.repel = T,group.by = "cell.label",
     do.print = T,do.return = F,
     title ="labeling by blue_encode")
 
-saveRDS(object, file = "data/GBM_PBMC_20210908.rds")
+saveRDS(object, file = "data/GBM_PBMC_3_20210908.rds")
 
 
 # by barplot

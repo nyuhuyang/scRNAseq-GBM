@@ -3,7 +3,7 @@ source("https://raw.githubusercontent.com/nyuhuyang/SeuratExtra/master/R/Seurat3
 path <- paste0("output/",gsub("-","",Sys.Date()),"/")
 if(!dir.exists(path)) dir.create(path, recursive = T)
 
-object <- readRDS("data/GBM_3_20210822.rds")
+object <- readRDS("data/GBM_PBMC_3_20210908.rds")
 
 object$orig.ident = gsub("_.*","",rownames(object@meta.data))
 
