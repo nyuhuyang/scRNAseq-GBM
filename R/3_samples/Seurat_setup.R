@@ -26,7 +26,7 @@ df_samples = as.data.frame(df_samples)
 colnames(df_samples) %<>% tolower()
 
 #======1.2 load  Seurat =========================
-object = readRDS(file = "data/GBM_3_20210822.rds")
+object = readRDS(file = "data/GBM_PBMC_3_20210908.rds")
 
 table(df_samples$sample %in% object$orig.ident)
 meta.data = object@meta.data
@@ -79,4 +79,4 @@ system.time(object %<>% RunTSNE(reduction = "harmony", dims = 1:npcs))
 object %<>% FindNeighbors(reduction = "harmony",dims = 1:2)
 object %<>% FindClusters(resolution = 0.8)
 
-saveRDS(object, file = "data/GBM_3_20210822.rds")
+saveRDS(object, file = "data/GBM_PBMC_3_20210908.rds")
