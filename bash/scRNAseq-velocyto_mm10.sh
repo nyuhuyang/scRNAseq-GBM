@@ -19,31 +19,19 @@ genes_gtf=/athena/elementolab/scratch/yah2014/Indexed_genome/refdata-gex-mm10-20
 echo "path="
 echo "$path"
 echo " "
-echo $(ls -l $path/$file_folder/$file)
+echo $(ls -l $path/$file_folder/possorted_genome_bam.bam)
 echo $(ls -l $rmsk_gtf)
 echo $(ls -l $genes_gtf)
 
-
+# don't sort bam file separately form Velocyto
 # ==== check if loom exist ======
-if test -f "$path/velocyto/$file_folder.loom"
+if test -f "${path%bam}velocyto/$file_folder.loom"
 then
     return 0;
     echo "loom file exist"
 else
     echo "loom file does not exist. Continue velocyto run10x."
 fi
-
-#----------------sort BAM File-------------------
-echo $(ls -l $path/$file_folder/possorted_genome_bam.bam)
-if test -f "$path/$file_folder/cellsorted_possorted_genome_bam.bam"
-then
-    echo "sorted bam exists"
-else
-    echo "sorted bam doesn't exists"
-    echo "to sort by cellID"
-    samtools sort -t CB -O BAM -o $path/$file_folder/cellsorted_possorted_genome_bam.bam $path/$file_folder/possorted_genome_bam.bam
-fi
-
 
 #----------------successfully File-------------------
 echo "to sort by cellID"
@@ -55,16 +43,18 @@ echo "Processing velocyto run10x"
 echo " "
 echo "-------------------------------- "
 echo "Processing $file_folder"
-cd ${path%bam}velocyto
-velocyto run10x -m $rmsk_gtf $path/$file_folder $genes_gtf --samtools-memory 250000
+cd $path/$file_folder
+velocyto run -b $path/$file_folder/barcodes.tsv -e $file_folder -m $rmsk_gtf $path/$file_folder/possorted_genome_bam.bam $genes_gtf
 
 # ==== check if loom exist ======
 echo "velocyto output files:"
 echo " "
-echo $(ls -l ${path%bam}velocyto/$file_folder.loom)
-if test -f "${path%bam}velocyto/$file_folder.loom"
+echo $(ls -l $path/$file_folder/velocyto/$file_folder.loom)
+if test -f "$path/$file_folder/velocyto/$file_folder.loom"
 then
     echo "loom file exists"
+    rsync -rav $path/$file_folder/velocyto/$file_folder.loom ${path%bam}velocyto
+
     echo "velocyto run10x Complished"
 else
     echo "loom file does not exist."
