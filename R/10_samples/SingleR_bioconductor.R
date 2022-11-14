@@ -25,7 +25,8 @@ sce <- SingleCellExperiment(list(logcounts=object[["SCT"]]@data),
                                 colData=DataFrame(object@meta.data))
 rm(object);GC()
 
-references = c("blue_encode","VHove2019","PAntunes2021","VHove2019_v2")[args]
+references = c("blue_encode","VHove2019","PAntunes2021","VHove2019_v2",#"Neftel2019",
+               "Abdelfattah2022")[args]
 # ====== load reference =============
 if(references == "blue_encode"){
     blue_encode <- BlueprintEncodeData()
@@ -115,4 +116,34 @@ if(references == "VHove2019_v2"){
     system.time(pred <- classifySingleR(sce[common,], trained))
     # elapsed 4872.846 sec
     saveRDS(object = pred, file = "output/GBM_10_20220707_VHove2019_v2_singleR_pred.rds")
+}
+
+if(references == "Abdelfattah2022"){
+    read_path <- "data/annotation_references/GSE182109/"
+    #file.rename(from = paste0(read_path,"Processed_barcodes.tsv.gz"), to= paste0(read_path,"barcodes.tsv.gz"))
+    #file.rename(from = paste0(read_path,"Processed_genes.tsv.gz"), to= paste0(read_path,"features.tsv.gz"))
+    #file.rename(from = paste0(read_path,"Processed_matrix.mtx.gz"), to= paste0(read_path,"matrix.mtx.gz"))
+    
+    counts <- Read10X(data.dir = "data/annotation_references/GSE182109")
+    
+    meta.data <- data.table::fread("data/annotation_references/GSE182109/Meta_GBM.txt") %>%
+        as.data.frame() %>% tibble::column_to_rownames("NAME")
+
+    meta.data <- meta.data[-1,]
+    table(colnames(counts) %in% rownames(meta.data))
+    libsizes <- colSums(counts)
+    size.factors <- libsizes/mean(libsizes)
+    Abdelfattah2022 <- SingleCellExperiment(list(logcounts=log1p(t(t(counts)/size.factors))),
+                                      colData=DataFrame(meta.data))
+    rownames(sce) %<>% toupper()
+    common <- Reduce(intersect, list(rownames(sce),
+                                     rownames(Abdelfattah2022)
+    ))
+    length(common)
+    table(Abdelfattah2022$SubAssignment)
+    system.time(trained <- trainSingleR(ref = Abdelfattah2022[common,],
+                                        labels=Abdelfattah2022$SubAssignment))
+    system.time(pred <- classifySingleR(sce[common,], trained))
+    # elapsed 4872.846 sec
+    saveRDS(object = pred, file = "output/GBM_10_20220707_Abdelfattah2022_singleR_pred.rds")
 }
